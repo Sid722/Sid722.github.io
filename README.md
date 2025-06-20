@@ -1,2 +1,2 @@
-# siddharthsinha.github.io
+# Sid722.github.io
 Personal Website
