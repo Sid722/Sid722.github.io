@@ -1,98 +1,31 @@
-/* ---------- Base / Resets ---------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Hero sizing + background */
+#home{
+  position: relative;
+  height: clamp(420px, 65vh, 760px);
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Let the ripples canvas sit above the background */
+#home canvas.jquery-ripples{
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;                /* ripples visible */
 }
 
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: #1b1f23;
-}
-
-/* Make in-page anchors land below the navbar */
-section {
-  scroll-margin-top: 84px; /* ~ navbar height */
-}
-
-/* ---------- Navbar tweaks ---------- */
-#mainNav {
-  position: sticky;
-  top: 0;
-  z-index: 1030;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  background: #ffffffcc; /* slight translucency */
-  backdrop-filter: saturate(180%) blur(8px);
-}
-
-/* If you fix the typo in HTML to class="navbar-brand", this will style it */
-.navbar-brand,
-.navbar=brand { /* keeps working even before you fix the typo */
-  font-weight: 700;
-}
-
-/* ---------- Hero / Home section ---------- */
-/* Remove vh-100 in your HTML and let CSS control the height */
-#home {
-  height: clamp(420px, 60vh, 720px);  /* smaller than full screen */
-  background-size: cover;             /* keeps it elegant */
-  background-position: 50% 18%;
-}
-@media (max-width: 576px){
-  #home{ background-position: 50% 10%;}
-}
-
-/* Dark overlay so text stays readable */
-#home .overlay {
+/* Overlay above the canvas but click-through */
+#home .overlay{
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.38),
-    rgba(0,0,0,0.28) 40%,
-    rgba(0,0,0,0.18)
-  );
+  background: rgba(0,0,0,0.35);  /* keep it semi-transparent */
+  z-index: 2;
+  pointer-events: none;          /* critical: don't block mouse */
 }
 
-/* Centered text sizing in hero */
-#home .container .lead {
-  letter-spacing: .3px;
-  opacity: .95;
-}
-
-/* ---------- Utilities ---------- */
-img {
-  max-width: 100%;
-  height: auto;        /* prevent image overflow anywhere else */
-}
-
-h1, h2, h3 {
-  line-height: 1.2;
-}
-
-/* Section spacing rhythm (Bootstrap already adds padding, this is light) */
-#about, #experience, #projects, #blog, #contact {
-  scroll-margin-top: 84px;
-}
-
-/* ---------- Responsive tweaks ---------- */
-@media (max-width: 992px) {
-  #home {
-    height: clamp(360px, 58vh, 640px);
-    background-position: center; /* less crop on tablets/phones */
-  }
-}
-
-@media (max-width: 576px) {
-  #home {
-    height: 56vh;
-  }
-  .display-4 {
-    font-size: 2.1rem; /* slightly smaller hero title on phones */
-  }
+/* Make the text appear on top */
+#home .container{
+  position: relative;
+  z-index: 3;
 }
